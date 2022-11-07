@@ -1,0 +1,188 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --card-color-primary: #f7dd43;
+    --card-title-border-color: #746615;
+    --card-bg-color: #1d1c19;
+    --bg: url(./assets/bg-yellow.svg);
+}
+
+ul {
+    list-style: none;
+}
+/*Aqui temos a padronização dos tamanho das imagens*/
+li > img {
+    width: 70.31px;
+    height: 70.31px;
+}
+
+body.blue {
+    --card-color-primary: #338af3;
+    --card-title-border-color: #338af3;
+    --card-bg-color: #202024;
+    --bg: url(./assets/bg-blue.svg);
+}
+
+body.green {
+    --card-color-primary: #047C3F;
+    --card-title-border-color: #047C3F;
+    --card-bg-color: #1A1F1B;
+    --bg: url(./assets/bg-green.svg);
+}
+
+body {
+/*
+    background-color: #121214;
+    background-image: var(--bg);
+    
+    #background-position: eixo x= top | eixo y= center#
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+*/
+    background: #121214 var(--bg) no-repeat top center/cover;
+}
+
+body * {
+    font-family: 'Roboto', sans-serif;
+}
+
+#app {
+/*fit content > está fazendo um encaixe do conteudo dentro da largura*/
+    width: fit-content;
+    margin: auto;
+    padding-top: 52px;
+}
+
+header {
+    margin-bottom: 63px;
+    text-align: center;
+    /*
+    Outra opção de alinhamento
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    */
+}
+
+#cards { 
+/* O flex deixa os elemento um abaixo do outro, então será necessário mexer nas 
+configurações para mudar a posição*/
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.card {
+    padding: 32px  23px;
+    text-align: center;
+
+    background-color: var(--card-bg-color);
+    border-bottom: 2px solid var(--card-color-primary);
+    border-radius: 6px;
+
+}
+
+.card h2{
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+
+    padding: 8px 16px;
+    border: 1px solid var(--card-title-border-color);
+    border-radius: 6px;
+
+    width: fit-content;
+    margin-inline: auto;
+    margin-bottom: 53px;
+
+    color: #f7dd43;
+}
+
+.card h2 span {
+    color:#e1e1e6;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.card ul {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+/*Gap -> espaço entre os elementos*/
+    width: 280px;
+}
+
+.card ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card ul li + li {
+    padding-top: 24px;
+    border-top: 1px solid #323238;
+}
+
+.card ul li strong {
+    font-weight: 900;
+    font-size: 36px;
+    line-height: 125%;
+
+    color: #e1e1e6
+}
+
+/*Quando o mouse ficar por cima do elemento, teremos uma interação*/
+.card h2:hover,
+.card ul li strong:hover, 
+.card ul li img:hover {
+    transform: scale(1.1);
+}
+
+/*Aqui temos a transição do efeito do hover/ transform*/
+.card h2,
+.card ul li strong,
+.card ul li img {
+    transition: transform 0.3s;
+}
+
+.card {
+    opacity: 0;
+    animation: appear .2s forwards;
+}
+
+.carde:nth-child(2) {
+    animation-delay: 2s;
+}
+
+.carde:nth-child(3) {
+    animation-delay: 4s;
+}
+
+/*@keyframes fará as animações| teremos uma opacidade e depois ele vai puxar o objeto para baixo*/
+@keyframes appear {
+    0% {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+/*Essa seleção está fazendo uma adaptação da tela, fazendo com que os cards fiquem um do lado
+do outro e com um espaçamento redefinido. O flex-wrap está embrulando os cards, fazendo com que
+eles não passem do max-width*/
+@media (min-width: 670px) {
+    #cards {
+        max-width: 700px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
